@@ -37,6 +37,7 @@ allprojects {
 
     dependencies {
         implementation fileTree(dir: 'libs', includes: ['*.jar'])
+        implementation group: 'com.alibaba.compileflow', name: 'compileflow', version: '1.2.0'
 //        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 //        compile name: 'miglayout-core-5.3-SNAPSHOT'
 //        compile name: 'miglayout-swing-5.3-SNAPSHOT'
