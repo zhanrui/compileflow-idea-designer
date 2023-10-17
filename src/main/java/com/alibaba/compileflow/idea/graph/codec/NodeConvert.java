@@ -21,33 +21,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.alibaba.compileflow.engine.definition.common.var.IVar;
-import com.alibaba.compileflow.engine.definition.tbbpm.AutoTaskNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.BreakNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.ContinueNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.DecisionNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.EndNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.FlowNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.LoopProcessNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.NoteNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.ScriptTaskNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.StartNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.SubBpmNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.Transition;
-import com.alibaba.compileflow.engine.definition.tbbpm.WaitEventTaskNode;
-import com.alibaba.compileflow.engine.definition.tbbpm.WaitTaskNode;
-import com.alibaba.compileflow.idea.graph.model.AutoTaskNodeModel;
-import com.alibaba.compileflow.idea.graph.model.BaseNodeModel;
-import com.alibaba.compileflow.idea.graph.model.BreakNodeModel;
-import com.alibaba.compileflow.idea.graph.model.ContinueNodeModel;
-import com.alibaba.compileflow.idea.graph.model.DecisionNodeModel;
-import com.alibaba.compileflow.idea.graph.model.EndNodeModel;
-import com.alibaba.compileflow.idea.graph.model.LoopProcessNodeModel;
-import com.alibaba.compileflow.idea.graph.model.NoteNodeModel;
-import com.alibaba.compileflow.idea.graph.model.ScriptTaskNodeModel;
-import com.alibaba.compileflow.idea.graph.model.StartNodeModel;
-import com.alibaba.compileflow.idea.graph.model.SubBpmNodeModel;
-import com.alibaba.compileflow.idea.graph.model.WaitEventModel;
-import com.alibaba.compileflow.idea.graph.model.WaitTaskNodeModel;
+import com.alibaba.compileflow.engine.definition.tbbpm.*;
+import com.alibaba.compileflow.idea.graph.model.*;
 
 /**
  * @author xuan
@@ -154,6 +129,19 @@ public class NodeConvert {
             waitTaskNode.setInAction(ActionConvert.toAction(waitTaskNodeModel.getInAction()));
             waitTaskNode.setOutAction(ActionConvert.toAction(waitTaskNodeModel.getOutAction()));
             return waitTaskNode;
+       } else if (model instanceof TxnTaskNodeModel) { //zhan
+
+            TxnTaskNodeModel nodeModel = (TxnTaskNodeModel)model;
+            TxnTaskNode node = new TxnTaskNode();
+            //
+            fillToNode(node, nodeModel);
+            node.setTxnCode(nodeModel.getTxnCode());
+            node.setEventName(nodeModel.getEventName());
+            node.setTag(node.getTxnCode());//TODO
+
+            node.setInAction(ActionConvert.toAction(nodeModel.getInAction()));
+            node.setOutAction(ActionConvert.toAction(nodeModel.getOutAction()));
+            return node;
         } else if (model instanceof ContinueNodeModel) {
             ContinueNodeModel continueNodeModel = (ContinueNodeModel)model;
             ContinueNode continueNode = new ContinueNode();
@@ -284,6 +272,14 @@ public class NodeConvert {
             fillToModel(model, waitEventNode);
             model.setEventName(waitEventNode.getEventName());
             model.setInAction(ActionConvert.toModel(waitEventNode.getInAction()));
+            return model;
+        } else if (node instanceof TxnTaskNode) {
+            TxnTaskNode taskNode = (TxnTaskNode)node;
+            TxnTaskNodeModel model = TxnTaskNodeModel.of();
+            fillToModel(model, taskNode);
+            model.setEventName(taskNode.getEventName());
+            model.setTxnCode(taskNode.getTxnCode());
+            model.setInAction(ActionConvert.toModel(taskNode.getInAction()));
             return model;
         }
 

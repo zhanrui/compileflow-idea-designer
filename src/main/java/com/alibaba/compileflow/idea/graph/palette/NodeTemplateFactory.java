@@ -19,21 +19,9 @@ package com.alibaba.compileflow.idea.graph.palette;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.compileflow.idea.graph.model.BreakNodeModel;
-import com.alibaba.compileflow.idea.graph.model.ContinueNodeModel;
-import com.alibaba.compileflow.idea.graph.model.WaitEventModel;
+import com.alibaba.compileflow.idea.graph.model.*;
 import com.alibaba.compileflow.idea.graph.util.Constants;
-import com.alibaba.compileflow.idea.graph.model.LoopProcessNodeModel;
 import com.alibaba.compileflow.idea.graph.palette.EditorPaletteModel.Template;
-import com.alibaba.compileflow.idea.graph.model.AutoTaskNodeModel;
-import com.alibaba.compileflow.idea.graph.model.DecisionNodeModel;
-import com.alibaba.compileflow.idea.graph.model.EndNodeModel;
-import com.alibaba.compileflow.idea.graph.model.NoteNodeModel;
-import com.alibaba.compileflow.idea.graph.model.ScriptTaskNodeModel;
-import com.alibaba.compileflow.idea.graph.model.StartNodeModel;
-import com.alibaba.compileflow.idea.graph.model.SubBpmNodeModel;
-import com.alibaba.compileflow.idea.graph.model.UserTaskNodeModel;
-import com.alibaba.compileflow.idea.graph.model.WaitTaskNodeModel;
 import com.alibaba.compileflow.idea.plugin.lang.Lang;
 
 /**
@@ -181,8 +169,21 @@ public class NodeTemplateFactory {
         waitEvent.value = WaitEventModel.of();
         ((WaitEventModel)waitEvent.value).setName(waitEvent.name);
         BPM_TEMPLATE_LIST.add(waitEvent);
+
+        //txnTask zhan
+        Template txnTask = new Template();
+        txnTask.name = Lang.getString("node.name.txnTask");
+        txnTask.iconUrl = "/com/alibaba/compileflow/idea/graph/images/palette/waitEvent.png";
+        txnTask.style = "txnTask";
+        txnTask.width = 120;
+        txnTask.height = 40;
+        txnTask.value = TxnTaskNodeModel.of();
+        ((TxnTaskNodeModel)txnTask.value).setName(txnTask.name);
+        BPM_TEMPLATE_LIST.add(txnTask);
+
     }
 
+    //BPMN
     static {
         //start
         Template start = new Template();

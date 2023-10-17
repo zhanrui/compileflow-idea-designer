@@ -46,7 +46,8 @@ public class AddComponentAction extends CreateElementActionBase {
 
     @Override
     protected String getActionName(PsiDirectory directory, String newName) {
-        return null;
+//        return null;
+        return "创建新的场景交易定义文件";
     }
 
     protected String getDialogPrompt() {

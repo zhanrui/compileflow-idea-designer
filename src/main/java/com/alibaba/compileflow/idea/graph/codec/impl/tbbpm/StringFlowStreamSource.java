@@ -26,7 +26,8 @@ import com.alibaba.compileflow.engine.process.preruntime.converter.impl.parser.m
  * @author xuan
  * @since 2020/6/22
  */
-public class StringFlowStreamSource implements FlowStreamSource {
+//public class StringFlowStreamSource implements FlowStreamSource {
+public class StringFlowStreamSource extends  FlowStreamSource{
 
     private String xml;
 

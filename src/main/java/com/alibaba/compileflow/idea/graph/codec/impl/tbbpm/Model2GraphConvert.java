@@ -16,25 +16,8 @@
  */
 package com.alibaba.compileflow.idea.graph.codec.impl.tbbpm;
 
-import com.alibaba.compileflow.idea.graph.model.BreakNodeModel;
-import com.alibaba.compileflow.idea.graph.model.ContinueNodeModel;
-import com.alibaba.compileflow.idea.graph.model.EdgeModel;
-import com.alibaba.compileflow.idea.graph.model.TransitionModel;
-import com.alibaba.compileflow.idea.graph.model.GeolocationModel;
-import com.alibaba.compileflow.idea.graph.model.WaitEventModel;
+import com.alibaba.compileflow.idea.graph.model.*;
 import com.alibaba.compileflow.idea.graph.mxgraph.Graph;
-import com.alibaba.compileflow.idea.graph.model.BpmModel;
-import com.alibaba.compileflow.idea.graph.model.AutoTaskNodeModel;
-import com.alibaba.compileflow.idea.graph.model.BaseNodeModel;
-import com.alibaba.compileflow.idea.graph.model.DecisionNodeModel;
-import com.alibaba.compileflow.idea.graph.model.EndNodeModel;
-import com.alibaba.compileflow.idea.graph.model.LoopProcessNodeModel;
-import com.alibaba.compileflow.idea.graph.model.NoteNodeModel;
-import com.alibaba.compileflow.idea.graph.model.ScriptTaskNodeModel;
-import com.alibaba.compileflow.idea.graph.model.StartNodeModel;
-import com.alibaba.compileflow.idea.graph.model.SubBpmNodeModel;
-import com.alibaba.compileflow.idea.graph.model.UserTaskNodeModel;
-import com.alibaba.compileflow.idea.graph.model.WaitTaskNodeModel;
 import com.alibaba.compileflow.idea.graph.util.SettingsUtils;
 
 import com.intellij.openapi.diagnostic.Logger;
@@ -205,6 +188,10 @@ public class Model2GraphConvert {
             GeolocationModel g1 = new GeolocationModel(model.getG());
             v = graph.insertVertex(parent, null, model, g1.x, g1.y, g1.w,
                 g1.h, "waitEvent");
+        } else if (model instanceof TxnTaskNodeModel) {//zhan
+            GeolocationModel g1 = new GeolocationModel(model.getG());
+            v = graph.insertVertex(parent, null, model, g1.x, g1.y, g1.w,
+                g1.h, "txnTask");
         } else {
             GeolocationModel g1 = new GeolocationModel(model.getG());
             v = graph.insertVertex(parent, null, model, g1.x, g1.y, g1.w,
