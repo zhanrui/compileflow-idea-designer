@@ -37,7 +37,7 @@ public abstract class TxnBaseMultiTabDialog extends TxnBaseDialog {
 
     @Override
     protected void initView() {
-        rootTab.addTab("basic setting1", new JLabel("basic setting1"));
+        rootTab.addTab("节点基础配置", new JLabel("节点基础配置"));
         rootTab.setComponentAt(0, basicPanel);
 
         panels = getPanels();

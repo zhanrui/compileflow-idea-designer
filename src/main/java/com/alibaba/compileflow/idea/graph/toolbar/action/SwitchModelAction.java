@@ -43,9 +43,10 @@ public class SwitchModelAction extends AbstractAction {
 
         String tips;
         if (switchModel.isDraw()) {
-            tips = "Open the drawing mode and double-click the node to set the properties";
+            tips = "打开绘图模式并双击节点设置属性。";
         } else {
-            tips = "Open edit mode and click node to set properties";
+//            tips = "Open edit mode and click node to set properties";
+            tips = "打开编辑模式并单击节点设置属性。";
         }
         DialogUtil.alert(tips);
     }

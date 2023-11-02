@@ -137,6 +137,10 @@ public class NodeConvert {
             fillToNode(node, nodeModel);
             node.setTxnCode(nodeModel.getTxnCode());
             node.setEventName(nodeModel.getEventName());
+//            node.setAllAutofillFlag(nodeModel.getAllAutofillFlag()); //TODO
+            node.setAutofillFields(nodeModel.getAutofillFields());
+            node.setRequiredFields(nodeModel.getRequiredFields());
+
             node.setTag(node.getTxnCode());//TODO
 
             node.setInAction(ActionConvert.toAction(nodeModel.getInAction()));

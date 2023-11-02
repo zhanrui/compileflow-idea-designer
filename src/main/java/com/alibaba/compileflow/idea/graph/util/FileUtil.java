@@ -78,6 +78,21 @@ public class FileUtil {
      */
     public static String getInitBpmText(String code) {
 
+        return "<?xml version='1.0' encoding='UTF-8'?>\n" +
+                "<bpm code=\"scene" +
+                code +
+                "\"" +
+                " name=\"场景交易模板\" type=\"statefulProcess\" description=\"场景交易模板\">\n" +
+                "  <var name=\"databus\" dataType=\"com.gientech.utap.sceneengine.service.SceneContext\" contextVarName=\"databus\" inOutType=\"param\"/>\n" +
+                "  <start id=\"1\" name=\"开始\" tag=\"start\" g=\"105,80,40,40\">\n" +
+                "    <transition to=\"10\" g=\"500,55,40,40\"/>\n" +
+                "  </start>\n" +
+                "  <txnTask id=\"10\" name=\"客户识别\" tag=\"900001\" txnCode=\"900001\" g=\"240,255,88,48\">\n" +
+                "    <transition to=\"99\" g=\":-15,20\"/>\n" +
+                "  </txnTask>\n" +
+                "  <end id=\"99\" name=\"结束\" tag=\"end\" g=\"265,515,40,40\"/>\n" +
+                "</bpm>";
+/*
         return "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" +
             "<bpm code=\"" + code + "\" name=\"test\" type=\"process\" description=\"This is test demo.\">\n" +
             "  <var name=\"num\" description=\"入参\" dataType=\"java.lang.Double\" inOutType=\"param\"/>\n" +
@@ -96,6 +111,7 @@ public class FileUtil {
             "    </action>\n" +
             "  </autoTask>\n" +
             "</bpm>";
+*/
     }
 
     /**

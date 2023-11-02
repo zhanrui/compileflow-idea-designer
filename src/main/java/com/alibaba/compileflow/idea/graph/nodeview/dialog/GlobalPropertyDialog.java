@@ -67,8 +67,8 @@ public class GlobalPropertyDialog extends DialogWrapper {
     }
 
     private void initView() {
-        tabbedPane.addTab("global basic setting", new JLabel("global basic setting"));
-        tabbedPane.addTab("global params setting", new JLabel("global params setting"));
+        tabbedPane.addTab("场景交易基础信息", new JLabel("场景交易基础信息"));
+        tabbedPane.addTab("场景交易全局变量", new JLabel("场景交易全局变量"));
         tabbedPane.setComponentAt(0, basicPanel);
         tabbedPane.setComponentAt(1, paramsPanel);
     }

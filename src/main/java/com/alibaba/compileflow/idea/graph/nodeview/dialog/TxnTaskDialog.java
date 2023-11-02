@@ -62,6 +62,9 @@ public class TxnTaskDialog extends TxnBaseMultiTabDialog {
         eventPanel.getEventNameField().setText(StringUtil.trimToEmpty(model.getEventName()));
         eventPanel.getTxnCodeField().setText(StringUtil.trimToEmpty(model.getTxnCode()));
 
+        eventPanel.getAutofillFields().setText(StringUtil.trimToEmpty(model.getAutofillFields()));
+        eventPanel.getRequiredFields().setText(StringUtil.trimToEmpty(model.getRequiredFields()));
+
         //inAction
         ActionPanel.data2View(panels[1], model.getInAction());
     }
@@ -74,6 +77,8 @@ public class TxnTaskDialog extends TxnBaseMultiTabDialog {
         TxnNodeEventPanel eventPanel = (TxnNodeEventPanel)panels[0];
         nodeModel.setEventName(StringUtil.trimToEmpty(eventPanel.getEventNameField().getText()));
         nodeModel.setTxnCode(StringUtil.trimToEmpty(eventPanel.getTxnCodeField().getText()));
+        nodeModel.setAutofillFields(StringUtil.trimToEmpty(eventPanel.getAutofillFields().getText()));
+        nodeModel.setRequiredFields(StringUtil.trimToEmpty(eventPanel.getRequiredFields().getText()));
 
         //txnCode
 //        TxnNodeBasicPanel basicPanel = (TxnNodeBasicPanel)panels[1];
@@ -97,7 +102,7 @@ public class TxnTaskDialog extends TxnBaseMultiTabDialog {
 
     @Override
     protected String[] getTabNames() {
-        return new String[] {"交易事件配置", "交易前置处理配置"};
+        return new String[] {"交易基础信息配置", "交易前置处理配置"};
     }
 
 }

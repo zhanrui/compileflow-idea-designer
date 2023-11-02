@@ -32,6 +32,10 @@ public class TxnNodeEventPanel extends JPanel {
     private JTextField eventNameField = new JTextField(30);
     private JLabel txnCodeLabel = new JLabel("柜面交易码:");
     private JTextField txnCodeField = new JTextField(30);
+    private JLabel autofillFieldsLabel = new JLabel("自动反填栏位:");
+    private JTextField autofillFields = new JTextField(80);
+    private JLabel requiredLabel = new JLabel("必填栏位:");
+    private JTextField requiredFields = new JTextField(80);
 
     public TxnNodeEventPanel() {
         super(new MigLayout("inset 20"));
@@ -41,6 +45,13 @@ public class TxnNodeEventPanel extends JPanel {
     private void initView() {
         this.add(txnCodeLabel, "gap para");
         this.add(txnCodeField, "wrap");
+
+        this.add(autofillFieldsLabel, "gap para");
+        this.add(autofillFields, "wrap");
+
+        this.add(requiredLabel, "gap para");
+        this.add(requiredFields, "wrap");
+
         this.add(eventNameLabel, "gap para");
         this.add(eventNameField, "wrap");
     }
@@ -51,5 +62,13 @@ public class TxnNodeEventPanel extends JPanel {
 
     public JTextField getTxnCodeField() {
         return txnCodeField;
+    }
+
+    public JTextField getAutofillFields() {
+        return autofillFields;
+    }
+
+    public JTextField getRequiredFields() {
+        return requiredFields;
     }
 }

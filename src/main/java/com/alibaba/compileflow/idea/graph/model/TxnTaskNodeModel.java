@@ -28,6 +28,9 @@ public class TxnTaskNodeModel extends BaseNodeModel {
 
     //zhan
     private String txnCode;
+    private String autofillFields;
+    private String requiredFields;
+    private String allAutofillFlag;
 
 
     private TxnTaskNodeModel() {
@@ -71,5 +74,30 @@ public class TxnTaskNodeModel extends BaseNodeModel {
 
     public void setTxnCode(String txnCode) {
         this.txnCode = txnCode;
+    }
+
+
+    public String getAutofillFields() {
+        return autofillFields;
+    }
+
+    public void setAutofillFields(String autofillFields) {
+        this.autofillFields = autofillFields;
+    }
+
+    public String getRequiredFields() {
+        return requiredFields;
+    }
+
+    public void setRequiredFields(String requiredFields) {
+        this.requiredFields = requiredFields;
+    }
+
+    public String getAllAutofillFlag() {
+        return allAutofillFlag;
+    }
+
+    public void setAllAutofillFlag(String allAutofillFlag) {
+        this.allAutofillFlag = allAutofillFlag;
     }
 }

@@ -41,7 +41,7 @@ import org.jetbrains.annotations.NotNull;
 public class AddComponentAction extends CreateElementActionBase {
 
     public AddComponentAction() {
-        super("create new BPM File", "Create new BPM File", ImageIconUtil.LOGO_ICON);
+        super("创建新的场景交易定义文件", "创建新的场景交易定义文件", ImageIconUtil.LOGO_ICON);
     }
 
     @Override
@@ -51,16 +51,16 @@ public class AddComponentAction extends CreateElementActionBase {
     }
 
     protected String getDialogPrompt() {
-        return "Enter name for new BPM File";
+        return "请输入场景交易码：";
     }
 
     protected String getDialogTitle() {
-        return "New BPM File";
+        return "新的场景交易定义文件";
     }
 
     @Override
     protected String getCommandName() {
-        return "Create BPM File";
+        return "创建场景交易定义文件";
     }
 
     @Override
@@ -101,8 +101,9 @@ public class AddComponentAction extends CreateElementActionBase {
     }
 
     private static PsiFile createFromTemplate(PsiDirectory directory, String className, String code) {
-        String text = FileUtil.getInitBpmText(code);
-        String fileName = className + ".bpm";
+//        String text = FileUtil.getInitBpmText(code);
+        String text = FileUtil.getInitBpmText(className);
+        String fileName = "scene" + className + ".bpm";
         PsiFile f = PsiFileFactory.getInstance(directory.getProject()).createFileFromText(fileName,
             BpmFileType.INSTANCE, text);
         return (PsiFile)directory.add(f);
