@@ -42,7 +42,7 @@ import java.util.List;
  * @author wuxiang
  */
 public class GlobalPropertyDialog extends DialogWrapper {
-    private static final String TITLE = "GlobalSetting";
+    private static final String TITLE = "场景交易全局参数配置";
 
     private GlobalBasicPanel basicPanel = new GlobalBasicPanel();
     private GlobalParamsPanel paramsPanel;
