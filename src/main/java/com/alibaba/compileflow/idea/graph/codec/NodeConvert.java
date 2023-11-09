@@ -38,7 +38,7 @@ public class NodeConvert {
 
         if (model instanceof AutoTaskNodeModel) {
 
-            AutoTaskNodeModel autoTaskNodeModel = (AutoTaskNodeModel)model;
+            AutoTaskNodeModel autoTaskNodeModel = (AutoTaskNodeModel) model;
             AutoTaskNode autoTaskNode = new AutoTaskNode();
             //
             fillToNode(autoTaskNode, autoTaskNodeModel);
@@ -47,7 +47,7 @@ public class NodeConvert {
 
         } else if (model instanceof DecisionNodeModel) {
 
-            DecisionNodeModel decisionNodeModel = (DecisionNodeModel)model;
+            DecisionNodeModel decisionNodeModel = (DecisionNodeModel) model;
             DecisionNode decisionNode = new DecisionNode();
             //
             fillToNode(decisionNode, decisionNodeModel);
@@ -56,14 +56,14 @@ public class NodeConvert {
 
         } else if (model instanceof EndNodeModel) {
 
-            EndNodeModel endNodeModel = (EndNodeModel)model;
+            EndNodeModel endNodeModel = (EndNodeModel) model;
             EndNode endNode = new EndNode();
             //
             fillToNode(endNode, endNodeModel);
             return endNode;
         } else if (model instanceof LoopProcessNodeModel) {
 
-            LoopProcessNodeModel loopProcessNodeModel = (LoopProcessNodeModel)model;
+            LoopProcessNodeModel loopProcessNodeModel = (LoopProcessNodeModel) model;
             LoopProcessNode loopProcessNode = new LoopProcessNode();
             //
             fillToNode(loopProcessNode, loopProcessNodeModel);
@@ -75,13 +75,13 @@ public class NodeConvert {
             loopProcessNode.setEndNodeId(loopProcessNodeModel.getEndNodeId());
             if (null != loopProcessNodeModel.getAllNodes()) {
                 loopProcessNodeModel.getAllNodes().forEach(
-                    subModel -> loopProcessNode.addNode(NodeConvert.toNode(subModel)));
+                        subModel -> loopProcessNode.addNode(NodeConvert.toNode(subModel)));
             }
             return loopProcessNode;
 
         } else if (model instanceof NoteNodeModel) {
 
-            NoteNodeModel noteNodeModel = (NoteNodeModel)model;
+            NoteNodeModel noteNodeModel = (NoteNodeModel) model;
             NoteNode noteNode = new NoteNode();
             //
             fillToNode(noteNode, noteNodeModel);
@@ -91,7 +91,7 @@ public class NodeConvert {
 
         } else if (model instanceof ScriptTaskNodeModel) {
 
-            ScriptTaskNodeModel scriptTaskNodeModel = (ScriptTaskNodeModel)model;
+            ScriptTaskNodeModel scriptTaskNodeModel = (ScriptTaskNodeModel) model;
             ScriptTaskNode scriptTaskNode = new ScriptTaskNode();
             //
             fillToNode(scriptTaskNode, scriptTaskNodeModel);
@@ -99,7 +99,7 @@ public class NodeConvert {
             return scriptTaskNode;
 
         } else if (model instanceof StartNodeModel) {
-            StartNodeModel startNodeModel = (StartNodeModel)model;
+            StartNodeModel startNodeModel = (StartNodeModel) model;
             StartNode startNode = new StartNode();
             //
             fillToNode(startNode, startNodeModel);
@@ -107,7 +107,7 @@ public class NodeConvert {
 
         } else if (model instanceof SubBpmNodeModel) {
 
-            SubBpmNodeModel subBpmNodeModel = (SubBpmNodeModel)model;
+            SubBpmNodeModel subBpmNodeModel = (SubBpmNodeModel) model;
             SubBpmNode subBpmNode = new SubBpmNode();
             //
             fillToNode(subBpmNode, subBpmNodeModel);
@@ -122,44 +122,53 @@ public class NodeConvert {
 
         } else if (model instanceof WaitTaskNodeModel) {
 
-            WaitTaskNodeModel waitTaskNodeModel = (WaitTaskNodeModel)model;
+            WaitTaskNodeModel waitTaskNodeModel = (WaitTaskNodeModel) model;
             WaitTaskNode waitTaskNode = new WaitTaskNode();
             //
             fillToNode(waitTaskNode, waitTaskNodeModel);
             waitTaskNode.setInAction(ActionConvert.toAction(waitTaskNodeModel.getInAction()));
             waitTaskNode.setOutAction(ActionConvert.toAction(waitTaskNodeModel.getOutAction()));
             return waitTaskNode;
-       } else if (model instanceof TxnTaskNodeModel) { //zhan
-
-            TxnTaskNodeModel nodeModel = (TxnTaskNodeModel)model;
+        } else if (model instanceof TxnTaskNodeModel) { //zhan
+            TxnTaskNodeModel nodeModel = (TxnTaskNodeModel) model;
             TxnTaskNode node = new TxnTaskNode();
-            //
             fillToNode(node, nodeModel);
             node.setTxnCode(nodeModel.getTxnCode());
             node.setEventName(nodeModel.getEventName());
-//            node.setAllAutofillFlag(nodeModel.getAllAutofillFlag()); //TODO
+            node.setAllAutofillFlag(nodeModel.getAllAutofillFlag()); //TODO
             node.setAutofillFields(nodeModel.getAutofillFields());
             node.setRequiredFields(nodeModel.getRequiredFields());
+            node.setSkipFlag(nodeModel.getSkipFlag());
+            node.setBackFlag(nodeModel.getBackFlag());
 
             node.setTag(node.getTxnCode());//TODO
 
             node.setInAction(ActionConvert.toAction(nodeModel.getInAction()));
             node.setOutAction(ActionConvert.toAction(nodeModel.getOutAction()));
             return node;
+        } else if (model instanceof CmpTaskNodeModel) {
+            CmpTaskNodeModel nodeModel = (CmpTaskNodeModel) model;
+            CmpTaskNode node = new CmpTaskNode();
+            fillToNode(node, nodeModel);
+            node.setTxnCode(nodeModel.getTxnCode()); //
+            node.setInAction(ActionConvert.toAction(nodeModel.getInAction()));
+            node.setOutAction(ActionConvert.toAction(nodeModel.getOutAction()));
+            return node;
+
         } else if (model instanceof ContinueNodeModel) {
-            ContinueNodeModel continueNodeModel = (ContinueNodeModel)model;
+            ContinueNodeModel continueNodeModel = (ContinueNodeModel) model;
             ContinueNode continueNode = new ContinueNode();
             fillToNode(continueNode, continueNodeModel);
             continueNode.setExpression(continueNodeModel.getExpression());
             return continueNode;
         } else if (model instanceof BreakNodeModel) {
-            BreakNodeModel breakNodeModel = (BreakNodeModel)model;
+            BreakNodeModel breakNodeModel = (BreakNodeModel) model;
             BreakNode breakNode = new BreakNode();
             fillToNode(breakNode, breakNodeModel);
             breakNode.setExpression(breakNodeModel.getExpression());
             return breakNode;
         } else if (model instanceof WaitEventModel) {
-            WaitEventModel waitEventModel = (WaitEventModel)model;
+            WaitEventModel waitEventModel = (WaitEventModel) model;
             WaitEventTaskNode waitEventNode = new WaitEventTaskNode();
             fillToNode(waitEventNode, waitEventModel);
             waitEventNode.setEventName(waitEventModel.getEventName());
@@ -177,7 +186,7 @@ public class NodeConvert {
         }
 
         return modelList.stream().map(NodeConvert::toNode).filter(Objects::nonNull).collect(
-            Collectors.toList());
+                Collectors.toList());
     }
 
     public static BaseNodeModel toModel(FlowNode node) {
@@ -187,27 +196,27 @@ public class NodeConvert {
         }
 
         if (node instanceof AutoTaskNode) {
-            AutoTaskNode autoTaskNode = (AutoTaskNode)node;
+            AutoTaskNode autoTaskNode = (AutoTaskNode) node;
             AutoTaskNodeModel model = AutoTaskNodeModel.of();
             //
             fillToModel(model, autoTaskNode);
             model.setAction(ActionConvert.toModel(autoTaskNode.getAction()));
             return model;
         } else if (node instanceof DecisionNode) {
-            DecisionNode decisionNode = (DecisionNode)node;
+            DecisionNode decisionNode = (DecisionNode) node;
             DecisionNodeModel model = DecisionNodeModel.of();
             //
             fillToModel(model, decisionNode);
             model.setAction(ActionConvert.toModel(decisionNode.getAction()));
             return model;
         } else if (node instanceof EndNode) {
-            EndNode endNode = (EndNode)node;
+            EndNode endNode = (EndNode) node;
             EndNodeModel model = EndNodeModel.of();
             //
             fillToModel(model, endNode);
             return model;
         } else if (node instanceof LoopProcessNode) {
-            LoopProcessNode loopProcessNode = (LoopProcessNode)node;
+            LoopProcessNode loopProcessNode = (LoopProcessNode) node;
             LoopProcessNodeModel model = LoopProcessNodeModel.of();
             //
             fillToModel(model, loopProcessNode);
@@ -220,7 +229,7 @@ public class NodeConvert {
             model.setAllNodes(NodeConvert.toModelList(loopProcessNode.getAllNodes()));
             return model;
         } else if (node instanceof NoteNode) {
-            NoteNode noteNode = (NoteNode)node;
+            NoteNode noteNode = (NoteNode) node;
             NoteNodeModel model = NoteNodeModel.of();
             //
             fillToModel(model, noteNode);
@@ -228,20 +237,20 @@ public class NodeConvert {
             model.setVisible(noteNode.isVisible() ? "true" : "false");
             return model;
         } else if (node instanceof ScriptTaskNode) {
-            ScriptTaskNode scriptTaskNode = (ScriptTaskNode)node;
+            ScriptTaskNode scriptTaskNode = (ScriptTaskNode) node;
             ScriptTaskNodeModel model = ScriptTaskNodeModel.of();
             //
             fillToModel(model, scriptTaskNode);
             model.setAction(ActionConvert.toModel(scriptTaskNode.getAction()));
             return model;
         } else if (node instanceof StartNode) {
-            StartNode startNode = (StartNode)node;
+            StartNode startNode = (StartNode) node;
             StartNodeModel model = StartNodeModel.of();
             //
             fillToModel(model, startNode);
             return model;
         } else if (node instanceof SubBpmNode) {
-            SubBpmNode subBpmNode = (SubBpmNode)node;
+            SubBpmNode subBpmNode = (SubBpmNode) node;
             SubBpmNodeModel model = SubBpmNodeModel.of();
             //
             fillToModel(model, subBpmNode);
@@ -251,7 +260,7 @@ public class NodeConvert {
             model.setVars(VarConvert.toModelList(subBpmNode.getVars()));
             return model;
         } else if (node instanceof WaitTaskNode) {
-            WaitTaskNode waitTaskNode = (WaitTaskNode)node;
+            WaitTaskNode waitTaskNode = (WaitTaskNode) node;
             WaitTaskNodeModel model = WaitTaskNodeModel.of();
             //
             fillToModel(model, waitTaskNode);
@@ -259,31 +268,45 @@ public class NodeConvert {
             model.setOutAction(ActionConvert.toModel(waitTaskNode.getOutAction()));
             return model;
         } else if (node instanceof ContinueNode) {
-            ContinueNode continueNode = (ContinueNode)node;
+            ContinueNode continueNode = (ContinueNode) node;
             ContinueNodeModel model = ContinueNodeModel.of();
             fillToModel(model, continueNode);
             model.setExpression(continueNode.getExpression());
             return model;
         } else if (node instanceof BreakNode) {
-            BreakNode breakNode = (BreakNode)node;
+            BreakNode breakNode = (BreakNode) node;
             BreakNodeModel model = BreakNodeModel.of();
             fillToModel(model, breakNode);
             model.setExpression(breakNode.getExpression());
             return model;
         } else if (node instanceof WaitEventTaskNode) {
-            WaitEventTaskNode waitEventNode = (WaitEventTaskNode)node;
+            WaitEventTaskNode waitEventNode = (WaitEventTaskNode) node;
             WaitEventModel model = WaitEventModel.of();
             fillToModel(model, waitEventNode);
             model.setEventName(waitEventNode.getEventName());
             model.setInAction(ActionConvert.toModel(waitEventNode.getInAction()));
             return model;
-        } else if (node instanceof TxnTaskNode) {
-            TxnTaskNode taskNode = (TxnTaskNode)node;
+        } else if (node instanceof TxnTaskNode) {//zhan
+            TxnTaskNode taskNode = (TxnTaskNode) node;
             TxnTaskNodeModel model = TxnTaskNodeModel.of();
             fillToModel(model, taskNode);
             model.setEventName(taskNode.getEventName());
             model.setTxnCode(taskNode.getTxnCode());
+            model.setAutofillFields(taskNode.getAutofillFields());
+            model.setRequiredFields(taskNode.getRequiredFields());
+            model.setAllAutofillFlag(taskNode.getAllAutofillFlag());
+            model.setBackFlag(taskNode.getBackFlag());
+            model.setSkipFlag(taskNode.getSkipFlag());
             model.setInAction(ActionConvert.toModel(taskNode.getInAction()));
+            return model;
+        } else if (node instanceof CmpTaskNode) {//zhan
+            CmpTaskNode taskNode = (CmpTaskNode) node;
+            CmpTaskNodeModel model = CmpTaskNodeModel.of();
+            fillToModel(model, taskNode);
+            model.setTxnCode(taskNode.getTxnCode());
+            //model.setEventName(taskNode.getEventName());
+            //model.setTxnCode(taskNode.getTxnCode());
+            //model.setInAction(ActionConvert.toModel(taskNode.getInAction()));
             return model;
         }
 
@@ -297,7 +320,7 @@ public class NodeConvert {
         }
 
         return nodeList.stream().map(NodeConvert::toModel).filter(Objects::nonNull).collect(
-            Collectors.toList());
+                Collectors.toList());
     }
 
     private static void fillToNode(FlowNode node, BaseNodeModel model) {

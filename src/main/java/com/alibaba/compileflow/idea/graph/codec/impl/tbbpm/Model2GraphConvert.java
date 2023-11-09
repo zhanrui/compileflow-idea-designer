@@ -192,6 +192,10 @@ public class Model2GraphConvert {
             GeolocationModel g1 = new GeolocationModel(model.getG());
             v = graph.insertVertex(parent, null, model, g1.x, g1.y, g1.w,
                 g1.h, "txnTask");
+        }else if (model instanceof CmpTaskNodeModel) {//zhan
+            GeolocationModel g1 = new GeolocationModel(model.getG());
+            v = graph.insertVertex(parent, null, model, g1.x, g1.y, g1.w,
+                g1.h, "cmpTask");
         } else {
             GeolocationModel g1 = new GeolocationModel(model.getG());
             v = graph.insertVertex(parent, null, model, g1.x, g1.y, g1.w,

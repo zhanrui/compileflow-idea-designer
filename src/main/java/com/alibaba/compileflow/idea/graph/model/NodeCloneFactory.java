@@ -54,6 +54,10 @@ public class NodeCloneFactory {
             newModel = WaitEventModel.of();
         } else if (oldModel instanceof TxnTaskNodeModel) {
             newModel = TxnTaskNodeModel.of();
+        } else if (oldModel instanceof CaseTaskNodeModel) {
+            newModel = CaseTaskNodeModel.of();
+        } else if (oldModel instanceof CmpTaskNodeModel) {
+            newModel = CmpTaskNodeModel.of();
         } else {
             newModel = AutoTaskNodeModel.of();
         }

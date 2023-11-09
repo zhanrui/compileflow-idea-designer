@@ -3,11 +3,9 @@ package com.alibaba.compileflow.idea.graph.nodeview.dialog;
 import com.alibaba.compileflow.idea.graph.model.ActionModel;
 import com.alibaba.compileflow.idea.graph.model.BaseNodeModel;
 import com.alibaba.compileflow.idea.graph.model.BpmModel;
-import com.alibaba.compileflow.idea.graph.model.TxnTaskNodeModel;
 import com.alibaba.compileflow.idea.graph.mxgraph.Graph;
 import com.alibaba.compileflow.idea.graph.nodeview.component.ActionPanel;
 import com.alibaba.compileflow.idea.graph.nodeview.component.CmpTaskPanel;
-import com.alibaba.compileflow.idea.graph.nodeview.component.TxnTaskPanel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.components.JBTabbedPane;
@@ -21,9 +19,10 @@ import javax.swing.*;
 import java.util.Set;
 
 /**
+ *
  * @author zhan
  */
-public  class TxnTaskDialog extends DialogWrapper {
+public  class CmpTaskDialog extends DialogWrapper {
 
     protected mxCell cell;
     protected Graph graph;
@@ -31,12 +30,11 @@ public  class TxnTaskDialog extends DialogWrapper {
 
     protected JBTabbedPane rootTab = new JBTabbedPane();
 //    protected NodeBasicPanel basicPanel = new NodeBasicPanel();
-    protected TxnTaskPanel taskPanel;
+    protected CmpTaskPanel taskPanel = new CmpTaskPanel();
     protected JPanel paramPanel;
 
-    public TxnTaskDialog(@Nullable Project project, mxCell cell, Graph graph) {
+    public CmpTaskDialog(@Nullable Project project, mxCell cell, Graph graph) {
         super(project);
-        taskPanel = new TxnTaskPanel(project);
         this.cell = cell;
         this.graph = graph;
         this.paramPanel = getParamPanel(project, graph, cell);
@@ -51,27 +49,20 @@ public  class TxnTaskDialog extends DialogWrapper {
     protected JComponent createCenterPanel() {
         initView();
         initData();
-        this.taskPanel.refresh();
         return rootTab;
     }
 
     @Override
     public void doOKAction() {
         super.doOKAction();
-        TxnTaskNodeModel baseModel = TxnTaskNodeModel.getFromCellValue(cell.getValue());
-        String oldId = baseModel.getId();
-        TxnTaskPanel.Data basicData = taskPanel.getData();
-        baseModel.setName(basicData.name);
-        baseModel.setId(basicData.id);
-        baseModel.setTag(basicData.tag);
-        baseModel.setG(basicData.g);
-        baseModel.setTxnCode(basicData.txnCode);
-        baseModel.setSkipFlag(basicData.skipFlag);
-        baseModel.setBackFlag(basicData.backFlag);
-        baseModel.setRequiredFields(basicData.requiredFields);
-        baseModel.setAutofillFields(basicData.autofillFields);
-        baseModel.setAllAutofillFlag(basicData.allAutofillFlag);
 
+        BaseNodeModel baseNodeModel = BaseNodeModel.getBaseNodeFromCellValue(cell.getValue());
+        String oldId = baseNodeModel.getId();
+        CmpTaskPanel.Data basicData = taskPanel.getData();
+        baseNodeModel.setName(basicData.name);
+        baseNodeModel.setId(basicData.id);
+        baseNodeModel.setTag(basicData.tag);
+        baseNodeModel.setG(basicData.g);
         //fix transitionTo if modify
         BpmModel bpmModel = BpmModel.getFromGraphModel(graph.getModel());
         bpmModel.fixTransitionTo(oldId, basicData.id);
@@ -86,7 +77,7 @@ public  class TxnTaskDialog extends DialogWrapper {
     protected void initView() {
         rootTab.addTab("基本配置", new JLabel("基础配置信息"));
         if (null != paramPanel) {
-            rootTab.addTab("交易处理配置", new JLabel("交易处理配置"));
+            rootTab.addTab("action setting", new JLabel("action setting"));
         }
 
         rootTab.setComponentAt(0, taskPanel);
@@ -101,19 +92,13 @@ public  class TxnTaskDialog extends DialogWrapper {
             return;
         }
 
-        TxnTaskNodeModel baseModel = TxnTaskNodeModel.getFromCellValue(cell.getValue());
-        TxnTaskPanel.Data basicData = new TxnTaskPanel.Data();
+        BaseNodeModel baseModel = BaseNodeModel.getBaseNodeFromCellValue(cell.getValue());
+        CmpTaskPanel.Data basicData = new CmpTaskPanel.Data();
         basicData.name = baseModel.getName();
         basicData.id = baseModel.getId();
         basicData.tag = baseModel.getTag();
         basicData.g = baseModel.getG();
-        basicData.txnCode = baseModel.getTxnCode();
-        basicData.skipFlag = baseModel.getSkipFlag();
-        basicData.backFlag = baseModel.getBackFlag();
-        basicData.requiredFields = baseModel.getRequiredFields();
-        basicData.autofillFields = baseModel.getAutofillFields();
-        basicData.allAutofillFlag = baseModel.getAllAutofillFlag();
-        taskPanel.setData(basicData);//设置panel控件数据
+        taskPanel.setData(basicData);
 
     }
 
@@ -123,7 +108,7 @@ public  class TxnTaskDialog extends DialogWrapper {
      * @return title
      */
     protected  String getDialogTitle(){
-        return "普通交易节点";
+        return "前端组件节点";
     }
 
 

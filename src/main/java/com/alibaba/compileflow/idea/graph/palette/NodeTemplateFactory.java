@@ -46,7 +46,7 @@ public class NodeTemplateFactory {
         start.width = 30;
         start.height = 30;
         start.value = StartNodeModel.of();
-        ((StartNodeModel)start.value).setName(start.name);
+        ((StartNodeModel) start.value).setName(start.name);
         BPM_TEMPLATE_LIST.add(start);
         //end
         Template end = new Template();
@@ -56,7 +56,7 @@ public class NodeTemplateFactory {
         end.width = 30;
         end.height = 30;
         end.value = EndNodeModel.of();
-        ((EndNodeModel)end.value).setName(end.name);
+        ((EndNodeModel) end.value).setName(end.name);
         BPM_TEMPLATE_LIST.add(end);
         //auto
         Template auto = new Template();
@@ -66,7 +66,7 @@ public class NodeTemplateFactory {
         auto.width = 90;
         auto.height = 50;
         auto.value = AutoTaskNodeModel.of();
-        ((AutoTaskNodeModel)auto.value).setName(auto.name);
+        ((AutoTaskNodeModel) auto.value).setName(auto.name);
         BPM_TEMPLATE_LIST.add(auto);
         //decision
         Template decision = new Template();
@@ -76,7 +76,7 @@ public class NodeTemplateFactory {
         decision.width = 90;
         decision.height = 50;
         decision.value = DecisionNodeModel.of();
-        ((DecisionNodeModel)decision.value).setName(decision.name);
+        ((DecisionNodeModel) decision.value).setName(decision.name);
         BPM_TEMPLATE_LIST.add(decision);
         //script
         Template script = new Template();
@@ -86,7 +86,7 @@ public class NodeTemplateFactory {
         script.width = 90;
         script.height = 50;
         script.value = ScriptTaskNodeModel.of();
-        ((ScriptTaskNodeModel)script.value).setName(script.name);
+        ((ScriptTaskNodeModel) script.value).setName(script.name);
         BPM_TEMPLATE_LIST.add(script);
         //subBpm
         Template subBpm = new Template();
@@ -96,7 +96,7 @@ public class NodeTemplateFactory {
         subBpm.width = 90;
         subBpm.height = 50;
         subBpm.value = SubBpmNodeModel.of();
-        ((SubBpmNodeModel)subBpm.value).setName(subBpm.name);
+        ((SubBpmNodeModel) subBpm.value).setName(subBpm.name);
         BPM_TEMPLATE_LIST.add(subBpm);
         //user
         Template user = new Template();
@@ -106,8 +106,9 @@ public class NodeTemplateFactory {
         user.width = 90;
         user.height = 50;
         user.value = UserTaskNodeModel.of();
-        ((UserTaskNodeModel)user.value).setName(user.name);
-        //BPM_TEMPLATE_LIST.add(user);
+        ((UserTaskNodeModel) user.value).setName(user.name);
+        BPM_TEMPLATE_LIST.add(user);
+
         //wait
         Template wait = new Template();
         wait.name = Lang.getString("node.name.wait");
@@ -116,8 +117,8 @@ public class NodeTemplateFactory {
         wait.width = 90;
         wait.height = 50;
         wait.value = WaitTaskNodeModel.of();
-        ((WaitTaskNodeModel)wait.value).setName(wait.name);
-        //BPM_TEMPLATE_LIST.add(wait);
+        ((WaitTaskNodeModel) wait.value).setName(wait.name);
+        BPM_TEMPLATE_LIST.add(wait);
         //note
         Template note = new Template();
         note.name = Lang.getString("node.name.note");
@@ -126,8 +127,8 @@ public class NodeTemplateFactory {
         note.width = 90;
         note.height = 50;
         note.value = NoteNodeModel.of();
-        ((NoteNodeModel)note.value).setName(note.name);
-        ((NoteNodeModel)note.value).setComment(note.name);
+        ((NoteNodeModel) note.value).setName(note.name);
+        ((NoteNodeModel) note.value).setComment(note.name);
         BPM_TEMPLATE_LIST.add(note);
         //loop
         Template loop = new Template();
@@ -137,7 +138,7 @@ public class NodeTemplateFactory {
         loop.width = 200;
         loop.height = 200;
         loop.value = LoopProcessNodeModel.of();
-        ((LoopProcessNodeModel)loop.value).setName(loop.name);
+        ((LoopProcessNodeModel) loop.value).setName(loop.name);
         BPM_TEMPLATE_LIST.add(loop);
         //continuee
         Template continuee = new Template();
@@ -147,9 +148,9 @@ public class NodeTemplateFactory {
         continuee.width = 80;
         continuee.height = 40;
         continuee.value = ContinueNodeModel.of();
-        ((ContinueNodeModel)continuee.value).setName(continuee.name);
+        ((ContinueNodeModel) continuee.value).setName(continuee.name);
         BPM_TEMPLATE_LIST.add(continuee);
-        //breakk
+        //break
         Template breakk = new Template();
         breakk.name = Lang.getString("node.name.break");
         breakk.iconUrl = "/com/alibaba/compileflow/idea/graph/images/palette/break.png";
@@ -157,7 +158,7 @@ public class NodeTemplateFactory {
         breakk.width = 80;
         breakk.height = 40;
         breakk.value = BreakNodeModel.of();
-        ((BreakNodeModel)breakk.value).setName(breakk.name);
+        ((BreakNodeModel) breakk.value).setName(breakk.name);
         BPM_TEMPLATE_LIST.add(breakk);
         //
         Template waitEvent = new Template();
@@ -167,19 +168,41 @@ public class NodeTemplateFactory {
         waitEvent.width = 80;
         waitEvent.height = 40;
         waitEvent.value = WaitEventModel.of();
-        ((WaitEventModel)waitEvent.value).setName(waitEvent.name);
+        ((WaitEventModel) waitEvent.value).setName(waitEvent.name);
         BPM_TEMPLATE_LIST.add(waitEvent);
 
         //txnTask zhan
         Template txnTask = new Template();
         txnTask.name = Lang.getString("node.name.txnTask");
-        txnTask.iconUrl = "/com/alibaba/compileflow/idea/graph/images/palette/waitEvent.png";
+        txnTask.iconUrl = "/com/alibaba/compileflow/idea/graph/images/palette/user.png";
         txnTask.style = "txnTask";
         txnTask.width = 120;
-        txnTask.height = 40;
+        txnTask.height = 50;
         txnTask.value = TxnTaskNodeModel.of();
-        ((TxnTaskNodeModel)txnTask.value).setName(txnTask.name);
+        ((TxnTaskNodeModel) txnTask.value).setName(txnTask.name);
         BPM_TEMPLATE_LIST.add(txnTask);
+
+        //caseTask zhan
+        Template caseTask = new Template();
+        caseTask.name = Lang.getString("node.name.caseTask");
+        caseTask.iconUrl = "/com/alibaba/compileflow/idea/graph/images/palette/loop.png";
+        caseTask.style = "loop";
+        caseTask.width = 220;
+        caseTask.height = 220;
+        caseTask.value = CaseTaskNodeModel.of();
+        ((CaseTaskNodeModel) caseTask.value).setName("动态节点:" + caseTask.name);
+        BPM_TEMPLATE_LIST.add(caseTask);
+
+        //cmpTask zhan
+        Template cmpTask = new Template();
+        cmpTask.name = Lang.getString("node.name.cmpTask");
+        cmpTask.iconUrl = "/com/alibaba/compileflow/idea/graph/images/palette/user.png";
+        cmpTask.style = "cmpTask";
+        cmpTask.width = 140;
+        cmpTask.height = 50;
+        cmpTask.value = CmpTaskNodeModel.of();
+        ((CmpTaskNodeModel) cmpTask.value).setName("前端组件：" + cmpTask.name);
+        BPM_TEMPLATE_LIST.add(cmpTask);
 
     }
 
@@ -193,7 +216,7 @@ public class NodeTemplateFactory {
         start.width = 30;
         start.height = 30;
         start.value = StartNodeModel.of();
-        ((StartNodeModel)start.value).setName(start.name);
+        ((StartNodeModel) start.value).setName(start.name);
         BPMN_TEMPLATE_LIST.add(start);
         //end
         Template end = new Template();
@@ -203,7 +226,7 @@ public class NodeTemplateFactory {
         end.width = 30;
         end.height = 30;
         end.value = EndNodeModel.of();
-        ((EndNodeModel)end.value).setName(end.name);
+        ((EndNodeModel) end.value).setName(end.name);
         BPMN_TEMPLATE_LIST.add(end);
         //auto
         Template auto = new Template();
@@ -213,7 +236,7 @@ public class NodeTemplateFactory {
         auto.width = 90;
         auto.height = 50;
         auto.value = AutoTaskNodeModel.of();
-        ((AutoTaskNodeModel)auto.value).setName(auto.name);
+        ((AutoTaskNodeModel) auto.value).setName(auto.name);
         BPMN_TEMPLATE_LIST.add(auto);
         //decision
         Template decision = new Template();
@@ -223,7 +246,7 @@ public class NodeTemplateFactory {
         decision.width = 90;
         decision.height = 50;
         decision.value = DecisionNodeModel.of();
-        ((DecisionNodeModel)decision.value).setName(decision.name);
+        ((DecisionNodeModel) decision.value).setName(decision.name);
         BPMN_TEMPLATE_LIST.add(decision);
         //script
         Template script = new Template();
@@ -233,7 +256,7 @@ public class NodeTemplateFactory {
         script.width = 90;
         script.height = 50;
         script.value = ScriptTaskNodeModel.of();
-        ((ScriptTaskNodeModel)script.value).setName(script.name);
+        ((ScriptTaskNodeModel) script.value).setName(script.name);
         BPMN_TEMPLATE_LIST.add(script);
     }
 

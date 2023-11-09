@@ -36,6 +36,8 @@
         <item key="node.name.break" value="循环跳出"/>
         <item key="node.name.wait.event" value="等待事件"/>
         <item key="node.name.txnTask" value="交易节点"/>
+        <item key="node.name.caseTask" value="动态节点"/>
+        <item key="node.name.cmpTask" value="前端组件"/>
 
         <item key="editor.text" value="文本"/>
         <item key="editor.java.code" value="Java代码"/>
@@ -57,6 +59,8 @@
         <item key="node.name.break" value="break"/>
         <item key="node.name.wait.event" value="waitEvent"/>
         <item key="node.name.txnTask" value="txnTask"/>
+        <item key="node.name.caseTask" value="caseTask"/>
+        <item key="node.name.cmpTask" value="cmpTask"/>
 
         <item key="editor.text" value="Text"/>
         <item key="editor.java.code" value="JavaCode"/>

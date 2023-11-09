@@ -87,10 +87,10 @@ public class FileUtil {
                 "  <start id=\"1\" name=\"开始\" tag=\"start\" g=\"105,80,40,40\">\n" +
                 "    <transition to=\"10\" g=\"500,55,40,40\"/>\n" +
                 "  </start>\n" +
-                "  <txnTask id=\"10\" name=\"客户识别\" tag=\"900001\" txnCode=\"900001\" g=\"240,255,88,48\">\n" +
+                "  <txnTask id=\"10\" name=\"客户识别\" tag=\"900001\" txnCode=\"900001\" g=\"235,255,120,55\">\n" +
                 "    <transition to=\"99\" g=\":-15,20\"/>\n" +
                 "  </txnTask>\n" +
-                "  <end id=\"99\" name=\"结束\" tag=\"end\" g=\"265,515,40,40\"/>\n" +
+                "  <end id=\"99\" name=\"结束\" tag=\"end\" g=\"275,515,40,40\"/>\n" +
                 "</bpm>";
 /*
         return "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" +

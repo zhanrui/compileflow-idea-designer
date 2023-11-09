@@ -1,25 +1,9 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.alibaba.compileflow.idea.graph.model;
 
 /**
  * @author zhan
  */
-public class TxnTaskNodeModel extends BaseNodeModel {
+public class CmpTaskNodeModel extends BaseNodeModel {
 
     private ActionModel inAction;
     private ActionModel outAction;
@@ -31,19 +15,17 @@ public class TxnTaskNodeModel extends BaseNodeModel {
     private String autofillFields;
     private String requiredFields;
     private String allAutofillFlag;
-    private String skipFlag;
-    private String backFlag;
 
 
-    private TxnTaskNodeModel() {
+    private CmpTaskNodeModel() {
     }
 
-    public static TxnTaskNodeModel of() {
-        return new TxnTaskNodeModel();
+    public static CmpTaskNodeModel of() {
+        return new CmpTaskNodeModel();
     }
 
-    public static TxnTaskNodeModel getFromCellValue(Object cellValue) {
-        return (TxnTaskNodeModel)cellValue;
+    public static CmpTaskNodeModel getFromCellValue(Object cellValue) {
+        return (CmpTaskNodeModel)cellValue;
     }
 
     public ActionModel getInAction() {
@@ -101,21 +83,5 @@ public class TxnTaskNodeModel extends BaseNodeModel {
 
     public void setAllAutofillFlag(String allAutofillFlag) {
         this.allAutofillFlag = allAutofillFlag;
-    }
-
-    public String getSkipFlag() {
-        return skipFlag;
-    }
-
-    public void setSkipFlag(String skipFlag) {
-        this.skipFlag = skipFlag;
-    }
-
-    public String getBackFlag() {
-        return backFlag;
-    }
-
-    public void setBackFlag(String backFlag) {
-        this.backFlag = backFlag;
     }
 }

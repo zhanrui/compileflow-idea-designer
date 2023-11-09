@@ -68,6 +68,10 @@ public class NodeEditDialogFactory {
         if (node instanceof TxnTaskNodeModel) {
             return new TxnTaskDialog(project, cell, graph);
         }
+        if (node instanceof CmpTaskNodeModel) {
+            return new CmpTaskDialog(project, cell, graph);
+        }
+
 
         if (node instanceof NoteNodeModel) {
             return new NoteDialog(project, cell, graph);
