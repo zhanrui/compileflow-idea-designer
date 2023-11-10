@@ -1,26 +1,22 @@
 package com.alibaba.compileflow.idea.graph.nodeview.component;
 
-import com.alibaba.compileflow.idea.graph.util.DialogUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ComboBox;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author zhan
  */
-public class TxnFieldsMapPanel extends JPanel {
+public class TxnFieldsMappingPanel extends JPanel {
 
     private JScrollPane scrollPane = new JBScrollPane() {
         @Override
@@ -40,7 +36,7 @@ public class TxnFieldsMapPanel extends JPanel {
 
     private Project project;
 
-    public TxnFieldsMapPanel(Project project) {
+    public TxnFieldsMappingPanel(Project project) {
         super(new MigLayout("inset 20"));
         this.project = project;
         initView();
@@ -60,7 +56,9 @@ public class TxnFieldsMapPanel extends JPanel {
             data.txnCode = (String) table.getModel().getValueAt(i, 1);
             data.oldFieldCode = (String) table.getModel().getValueAt(i, 2);
             data.newFieldCode = (String) table.getModel().getValueAt(i, 3);
-            dataList.add(data);
+            if (!data.newFieldCode.isEmpty()) { //TODO 不能为空
+                dataList.add(data);
+            }
         }
         return dataList;
     }

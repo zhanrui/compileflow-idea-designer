@@ -1,6 +1,5 @@
 package com.alibaba.compileflow.idea.graph.nodeview.component;
 
-import com.alibaba.compileflow.idea.graph.model.UserTaskNodeModel;
 import com.intellij.openapi.project.Project;
 import net.miginfocom.swing.MigLayout;
 
@@ -39,11 +38,11 @@ public class TxnTaskPanel extends JPanel {
 
     private String skipFlag;
     private String backFlag;
-    private TxnFieldsMapPanel mapPanel;
+    private TxnFieldsMappingPanel mappingPanel;
 
     public TxnTaskPanel(Project project) {
         super(new MigLayout("inset 20"));
-        mapPanel = new TxnFieldsMapPanel(project);
+        mappingPanel = new TxnFieldsMappingPanel(project);
         initView();
         initListener();
     }
@@ -88,7 +87,8 @@ public class TxnTaskPanel extends JPanel {
         this.add(group2, "wrap");
 
         this.add(new JSeparator(), "span, growx, wrap, gaptop 10, gapbottom 10");
-        this.add(mapPanel, "span, growx, wrap 10");
+        //fields mapping
+        this.add(mappingPanel, "span, growx, wrap 10");
         refresh();
     }
 
@@ -161,5 +161,9 @@ public class TxnTaskPanel extends JPanel {
         public String autofillFields;
         public String requiredFields;
         public String allAutofillFlag;
+    }
+
+    public TxnFieldsMappingPanel getMappingPanel() {
+        return mappingPanel;
     }
 }
