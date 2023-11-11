@@ -15,6 +15,8 @@ public class CmpTaskNodeModel extends BaseNodeModel {
     private String autofillFields;
     private String requiredFields;
     private String allAutofillFlag;
+    private String skipFlag;
+    private String backFlag;
 
 
     private CmpTaskNodeModel() {
@@ -83,5 +85,21 @@ public class CmpTaskNodeModel extends BaseNodeModel {
 
     public void setAllAutofillFlag(String allAutofillFlag) {
         this.allAutofillFlag = allAutofillFlag;
+    }
+
+    public String getSkipFlag() {
+        return skipFlag;
+    }
+
+    public void setSkipFlag(String skipFlag) {
+        this.skipFlag = skipFlag;
+    }
+
+    public String getBackFlag() {
+        return backFlag;
+    }
+
+    public void setBackFlag(String backFlag) {
+        this.backFlag = backFlag;
     }
 }

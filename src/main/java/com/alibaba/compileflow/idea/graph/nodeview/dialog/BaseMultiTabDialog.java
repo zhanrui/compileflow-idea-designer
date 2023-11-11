@@ -40,7 +40,7 @@ public abstract class BaseMultiTabDialog extends BaseDialog {
 
     @Override
     protected void initView() {
-        rootTab.addTab("basic setting", new JLabel("basic setting"));
+        rootTab.addTab("节点基本配置", new JLabel("节点基本配置"));
         rootTab.setComponentAt(0, basicPanel);
 
         panels = getPanels();

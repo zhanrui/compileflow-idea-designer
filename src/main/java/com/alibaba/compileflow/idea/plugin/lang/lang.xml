@@ -31,12 +31,12 @@
         <item key="node.name.user" value="用户节点"/>
         <item key="node.name.wait" value="等待节点"/>
         <item key="node.name.note" value="注释节点"/>
-        <item key="node.name.loop" value="循环节点"/>
+        <item key="node.name.loop" value="动态节点"/>
         <item key="node.name.continue" value="循环中断"/>
         <item key="node.name.break" value="循环跳出"/>
         <item key="node.name.wait.event" value="等待事件"/>
         <item key="node.name.txnTask" value="交易节点"/>
-        <item key="node.name.caseTask" value="动态节点"/>
+        <item key="node.name.caseTask" value="A动态节点"/>
         <item key="node.name.cmpTask" value="前端组件"/>
 
         <item key="editor.text" value="文本"/>

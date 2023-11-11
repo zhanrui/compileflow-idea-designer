@@ -40,12 +40,12 @@ public class LoopTaskParamsPanel extends JPanel {
     /**
      * collectionVarName
      */
-    private JLabel collectionVarNameLabel = new JLabel("collectionVarName:");
+    private JLabel collectionVarNameLabel = new JLabel("必做交易列表:");
     private JComboxTextField collectionVarNameField;
     /**
      * variableName
      */
-    private JLabel variableNameLabel = new JLabel("variableName:");
+    private JLabel variableNameLabel = new JLabel("可选交易列表:");
     private JTextField variableNameField = new JTextField(20);
     /**
      * indexVarName
@@ -60,12 +60,12 @@ public class LoopTaskParamsPanel extends JPanel {
     /**
      * startNodeId
      */
-    private JLabel startNodeIdLabel = new JLabel("startNodeId:");
+    private JLabel startNodeIdLabel = new JLabel("起始交易节点:");
     private JTextField startNodeIdField = new JTextField(20);
     /**
      * endNodeId
      */
-    private JLabel endNodeIdLabel = new JLabel("endNodeId:");
+    private JLabel endNodeIdLabel = new JLabel("结束交易节点:");
     private JTextField endNodeIdField = new JTextField(20);
 
     private Project project;
@@ -86,11 +86,11 @@ public class LoopTaskParamsPanel extends JPanel {
         this.add(variableNameLabel, "gap para");
         this.add(variableNameField, "wrap");
         //indexVarName
-        this.add(indexVarNameLabel, "gap para");
-        this.add(indexVarNameField, "wrap");
+//        this.add(indexVarNameLabel, "gap para");
+//        this.add(indexVarNameField, "wrap");
         //variableClass
-        this.add(variableClassLabel, "gap para");
-        this.add(variableClassField, "wrap");
+//        this.add(variableClassLabel, "gap para");
+//        this.add(variableClassField, "wrap");
         //startNodeId
         this.add(startNodeIdLabel, "gap para");
         this.add(startNodeIdField, "wrap");

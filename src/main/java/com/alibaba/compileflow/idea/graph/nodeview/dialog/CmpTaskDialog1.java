@@ -1,26 +1,11 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.alibaba.compileflow.idea.graph.nodeview.dialog;
 
-import com.alibaba.compileflow.idea.graph.nodeview.component.NodeBasicPanel;
-import com.alibaba.compileflow.idea.graph.mxgraph.Graph;
-import com.alibaba.compileflow.idea.graph.model.BpmModel;
+import com.alibaba.compileflow.idea.graph.model.ActionModel;
 import com.alibaba.compileflow.idea.graph.model.BaseNodeModel;
-
+import com.alibaba.compileflow.idea.graph.model.BpmModel;
+import com.alibaba.compileflow.idea.graph.mxgraph.Graph;
+import com.alibaba.compileflow.idea.graph.nodeview.component.ActionPanel;
+import com.alibaba.compileflow.idea.graph.nodeview.component.CmpTaskPanel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.components.JBTabbedPane;
@@ -31,29 +16,28 @@ import com.mxgraph.util.mxUndoableEdit;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-
 import java.util.Set;
 
 /**
- * Base node edit dialog
  *
- * @author xuan
- * @since 2019/3/10
+ * @author zhan
  */
-public abstract class BaseDialog extends DialogWrapper {
+public  class CmpTaskDialog1 extends DialogWrapper {
 
     protected mxCell cell;
     protected Graph graph;
     protected Project project;
 
     protected JBTabbedPane rootTab = new JBTabbedPane();
-    protected NodeBasicPanel basicPanel = new NodeBasicPanel();
+//    protected NodeBasicPanel basicPanel = new NodeBasicPanel();
+    protected CmpTaskPanel taskPanel;
     protected JPanel paramPanel;
 
-    public BaseDialog(@Nullable Project project, mxCell cell, Graph graph) {
+    public CmpTaskDialog1(@Nullable Project project, mxCell cell, Graph graph) {
         super(project);
         this.cell = cell;
         this.graph = graph;
+        taskPanel = new CmpTaskPanel(project);
         this.paramPanel = getParamPanel(project, graph, cell);
         this.project = project;
         setTitle(getDialogTitle());
@@ -75,7 +59,7 @@ public abstract class BaseDialog extends DialogWrapper {
 
         BaseNodeModel baseNodeModel = BaseNodeModel.getBaseNodeFromCellValue(cell.getValue());
         String oldId = baseNodeModel.getId();
-        NodeBasicPanel.Data basicData = basicPanel.getData();
+        CmpTaskPanel.Data basicData = taskPanel.getData();
         baseNodeModel.setName(basicData.name);
         baseNodeModel.setId(basicData.id);
         baseNodeModel.setTag(basicData.tag);
@@ -84,7 +68,6 @@ public abstract class BaseDialog extends DialogWrapper {
         BpmModel bpmModel = BpmModel.getFromGraphModel(graph.getModel());
         bpmModel.fixTransitionTo(oldId, basicData.id);
 
-        doParamSave();
 
         // notify change
         graph.refresh();
@@ -93,17 +76,16 @@ public abstract class BaseDialog extends DialogWrapper {
     }
 
     protected void initView() {
-        rootTab.addTab("节点基本配置", new JLabel("节点基本配置"));
+        rootTab.addTab("基本配置", new JLabel("基础配置信息"));
         if (null != paramPanel) {
-            rootTab.addTab("节点处理参数配置", new JLabel("节点处理参数配置"));
+            rootTab.addTab("action setting", new JLabel("action setting"));
         }
 
-        rootTab.setComponentAt(0, basicPanel);
+        rootTab.setComponentAt(0, taskPanel);
         if (null != paramPanel) {
             rootTab.setComponentAt(1, paramPanel);
         }
 
-        initParamPanelView();
     }
 
     private void initData() {
@@ -112,14 +94,13 @@ public abstract class BaseDialog extends DialogWrapper {
         }
 
         BaseNodeModel baseModel = BaseNodeModel.getBaseNodeFromCellValue(cell.getValue());
-        NodeBasicPanel.Data basicData = new NodeBasicPanel.Data();
+        CmpTaskPanel.Data basicData = new CmpTaskPanel.Data();
         basicData.name = baseModel.getName();
         basicData.id = baseModel.getId();
         basicData.tag = baseModel.getTag();
         basicData.g = baseModel.getG();
-        basicPanel.setData(basicData);
+        taskPanel.setData(basicData);
 
-        initParamPanelData();
     }
 
     /**
@@ -127,35 +108,42 @@ public abstract class BaseDialog extends DialogWrapper {
      *
      * @return title
      */
-    protected abstract String getDialogTitle();
+    protected  String getDialogTitle(){
+        return "前端组件节点";
+    }
 
-    /**
-     * Get param settings panel
-     *
-     * @param project project
-     * @param graph   graph
-     * @return jpanel
-     */
-    protected abstract JPanel getParamPanel(Project project, Graph graph, mxCell cell);
 
-    /**
-     * Init view
-     */
-    protected abstract void initParamPanelView();
-
-    /**
-     * Init data to view
-     */
-    protected abstract void initParamPanelData();
-
-    /**
-     * Called after click ok
-     */
-    protected abstract void doParamSave();
 
     protected Set<String> getContextVarNameSet() {
         BpmModel bpmModel = BpmModel.getFromGraphModel(graph.getModel());
         return bpmModel.getContextVarNameSet();
+    }
+
+    //===
+    protected JPanel getParamPanel(Project project, Graph graph, mxCell cell) {
+        return new ActionPanel(project);
+    }
+
+    protected void initParamPanelView() {
+        ActionPanel.initContextVarNameComboBox(paramPanel, graph);
+        ((ActionPanel)paramPanel).setJumpToSourceActionCallback((s) -> {
+            doCancelAction();
+            return null;
+        });
+    }
+
+    protected void initParamPanelData() {
+        ActionPanel.data2View(paramPanel, ActionModel.getActionFromCellValue(cell.getValue()));
+    }
+
+    protected void doParamSave() {
+        ActionModel actionModel = ActionModel.getActionFromCellValue(cell.getValue());
+        if (null == actionModel) {
+            actionModel = ActionModel.of();
+        }
+
+        ActionModel.setActionToCellValue(cell.getValue(), actionModel);
+        ActionPanel.view2Data(paramPanel, actionModel);
     }
 
 }

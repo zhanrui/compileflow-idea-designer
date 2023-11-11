@@ -33,23 +33,23 @@ public class GlobalBasicPanel extends JPanel {
     /**
      * code
      */
-    private JLabel codeLabel = new JLabel("code:");
+    private JLabel codeLabel = new JLabel("场景码:");
     private JTextField codeField = new JTextField(20);
     /**
      * type
      */
-    private JLabel typeLabel = new JLabel("type:");
+    private JLabel typeLabel = new JLabel("场景类型:");
     private ComboBox<String> typeBox = new ComboBox<>();
     private DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
     /**
      * name
      */
-    private JLabel nameLabel = new JLabel("name:");
+    private JLabel nameLabel = new JLabel("场景名称:");
     private JTextField nameField = new JTextField(20);
     /**
      * description
      */
-    private JLabel descriptionLabel = new JLabel("description");
+    private JLabel descriptionLabel = new JLabel("场景描述");
     private JTextField descriptionField = new JTextField(20);
 
     public GlobalBasicPanel() {

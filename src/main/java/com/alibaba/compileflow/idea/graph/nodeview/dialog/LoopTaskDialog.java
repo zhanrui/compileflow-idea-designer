@@ -41,7 +41,7 @@ public class LoopTaskDialog extends BaseDialog {
 
     @Override
     protected String getDialogTitle() {
-        return "LoopTask Setting";
+        return "动态交易节点相关信息配置";
     }
 
     @Override

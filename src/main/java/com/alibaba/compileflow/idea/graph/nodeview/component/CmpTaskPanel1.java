@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.alibaba.compileflow.idea.graph.nodeview.component;
 
 import net.miginfocom.swing.MigLayout;
@@ -21,52 +5,57 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 
 /**
- * Node edit basic info view
- *
- * @author xuan
- * @since 2019/3/10
+ * @author zhan
  */
-public class NodeBasicPanel extends JPanel {
+public class CmpTaskPanel1 extends JPanel {
 
-    /**
-     * name
-     */
     private JLabel nameLabel = new JLabel("节点名称");
     private JTextField nameText = new JTextField(20);
-    /**
-     * id
-     */
     private JLabel idLabel = new JLabel("节点ID");
     private JTextField idText = new JTextField(10);
-    /**
-     * tag
-     */
     private JLabel tagLabel = new JLabel("节点标签");
     private JTextField tagText = new JTextField(20);
-    /**
-     * g
-     */
     private JLabel gLabel = new JLabel("g");
     private JTextField gText = new JTextField(20);
 
-    public NodeBasicPanel() {
+    private JLabel txnCodeLabel = new JLabel("前端组件码:");
+    private JTextField txnCodeField = new JTextField(30);
+    private JLabel autofillFieldsLabel = new JLabel("自动反填栏位:");
+    private JTextField autofillFields = new JTextField(80);
+    private JLabel requiredLabel = new JLabel("必填栏位:");
+    private JTextField requiredFields = new JTextField(80);
+
+
+    public CmpTaskPanel1() {
         super(new MigLayout("inset 20"));
         initView();
     }
 
     private void initView() {
+//        this.setPreferredSize(new Dimension(1000, 400));
+
+        this.add(txnCodeLabel, "gap para");
+        this.add(txnCodeField, "wrap");
         this.add(nameLabel, "gap para");
-        this.add(nameText, "span, growx, wrap");
-        this.add(idLabel, "gap para");
-        this.add(idText, "span, growx, wrap");
+        this.add(nameText, "span, wrap");
         this.add(tagLabel, "gap para");
-        this.add(tagText, "span, growx, wrap");
-        this.add(gLabel, "gap para");
-        this.add(gText, "span, growx, wrap");
+        this.add(tagText, "span, wrap");
+        this.add(idLabel, "gap para");
+        this.add(idText, "span, wrap");
+//        this.add(gLabel, "gap para");
+//        this.add(gText, "span, growx, wrap");
+
+        this.add(new JSeparator(), "span, growx, wrap, gaptop 10, gapbottom 10");
+        this.add(autofillFieldsLabel, "gap para");
+        this.add(autofillFields, "wrap");
+        this.add(requiredLabel, "gap para");
+        this.add(requiredFields, "wrap");
+
+
     }
 
-    public NodeBasicPanel.Data getData() {
-        NodeBasicPanel.Data data = new NodeBasicPanel.Data();
+    public CmpTaskPanel1.Data getData() {
+        CmpTaskPanel1.Data data = new CmpTaskPanel1.Data();
         data.name = nameText.getText();
         data.id = idText.getText();
         data.tag = tagText.getText();
@@ -74,7 +63,7 @@ public class NodeBasicPanel extends JPanel {
         return data;
     }
 
-    public void setData(NodeBasicPanel.Data data) {
+    public void setData(CmpTaskPanel1.Data data) {
         nameText.setText(data.name);
         idText.setText(data.id);
         tagText.setText(data.tag);
@@ -86,17 +75,18 @@ public class NodeBasicPanel extends JPanel {
         public String id;
         public String tag;
         public String g;
+        public String txnCode;
     }
 
     public static void main(String[] args) {
-        NodeBasicPanel panel = new NodeBasicPanel();
+        CmpTaskPanel1 panel = new CmpTaskPanel1();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
         frame.getContentPane().add(panel);
         frame.setVisible(true);
 
-        NodeBasicPanel.Data data = new NodeBasicPanel.Data();
+        CmpTaskPanel1.Data data = new CmpTaskPanel1.Data();
         data.name = "name1";
         data.id = "123";
         data.tag = "Hi";

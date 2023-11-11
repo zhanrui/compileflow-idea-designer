@@ -169,7 +169,7 @@ public class NodeTemplateFactory {
         waitEvent.height = 40;
         waitEvent.value = WaitEventModel.of();
         ((WaitEventModel) waitEvent.value).setName(waitEvent.name);
-        BPM_TEMPLATE_LIST.add(waitEvent);
+        //BPM_TEMPLATE_LIST.add(waitEvent);
 
         //txnTask zhan
         Template txnTask = new Template();
@@ -191,7 +191,7 @@ public class NodeTemplateFactory {
         caseTask.height = 220;
         caseTask.value = CaseTaskNodeModel.of();
         ((CaseTaskNodeModel) caseTask.value).setName("动态节点:" + caseTask.name);
-        BPM_TEMPLATE_LIST.add(caseTask);
+        //BPM_TEMPLATE_LIST.add(caseTask);
 
         //cmpTask zhan
         Template cmpTask = new Template();
